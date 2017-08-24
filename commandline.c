@@ -124,6 +124,11 @@ parse_commandline(int argc, char **argv)
 				config->config_file = strdup(optarg);
 			}
 			break;
+		
+		case 'z':
+			config->socket_fd = atoi(optarg);
+			printf("socket = %d\n",config->socket_fd);
+			break;
 
 		case 'f':
 			config->daemon = 0;

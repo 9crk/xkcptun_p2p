@@ -118,7 +118,14 @@ int client_main_loop(void)
 {
 	struct event_base *base = NULL;
 	struct evconnlistener *listener = NULL, *mlistener = NULL;
-	int xkcp_fd = socket(AF_INET, SOCK_DGRAM, 0);
+	struct xkcp_config *config = xkcp_get_config();
+	printf("i got socket_fd = %d\n",config->socket_fd);
+	int xkcp_fd;
+	if(config->socket_fd != 0){
+	 	xkcp_fd = config->socket_fd;
+	}else{
+	 	xkcp_fd = socket(AF_INET, SOCK_DGRAM, 0);
+	}
 	struct event timer_event, *xkcp_event;
 
 	if (xkcp_fd < 0) {

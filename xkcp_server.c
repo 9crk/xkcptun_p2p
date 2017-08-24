@@ -185,6 +185,7 @@ static int set_xkcp_listener()
 {
 	short lport = xkcp_get_param()->local_port;
 	struct sockaddr_in sin;
+	struct xkcp_config *config = xkcp_get_config();
 	char *addr = get_iface_ip(xkcp_get_param()->local_interface);
 	if (!addr) {
 		debug(LOG_ERR, "get_iface_ip [%s] failed", xkcp_get_param()->local_interface);
@@ -196,12 +197,19 @@ static int set_xkcp_listener()
     sin.sin_addr.s_addr = inet_addr(addr);
     sin.sin_port = htons(lport);
 	
-	int xkcp_fd = socket(AF_INET, SOCK_DGRAM, 0);
-	
+	int xkcp_fd;
+	printf("im using fd %d\n",config->socket_fd);
+	if(config->socket_fd != 0){
+		xkcp_fd = config->socket_fd;
+	}else{
+		xkcp_fd = socket(AF_INET, SOCK_DGRAM, 0);
+	}
+	/*
 	if (bind(xkcp_fd, (struct sockaddr *) &sin, sizeof(sin))) {
 		debug(LOG_ERR, "xkcp_fd bind() failed %s ", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
+	*/
 	
 	return xkcp_fd;
 }

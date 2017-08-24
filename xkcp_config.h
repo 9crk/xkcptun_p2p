@@ -53,6 +53,7 @@ struct xkcp_config {
 	char 	*config_file;
 	int 	daemon;
 	int		is_server;
+	int     socket_fd;
 	int		(*main_loop)();
 
 	struct xkcp_param param;

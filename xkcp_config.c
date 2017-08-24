@@ -69,6 +69,7 @@ void config_init()
 {
 	config.daemon 		= 1;
 	config.is_server 	= 0;
+	config.socket_fd	= 0;
 
 	xkcp_param_init(&config.param);
 }
