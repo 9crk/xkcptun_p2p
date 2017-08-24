@@ -34,6 +34,10 @@ struct xkcp_config * xkcp_get_config(void)
 {
 	return &config;
 }
+void xkcp_set_config_fd(int fd)
+{
+	config.socket_fd = fd;
+}
 
 struct xkcp_param *xkcp_get_param(void)
 {

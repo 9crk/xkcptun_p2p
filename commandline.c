@@ -108,7 +108,7 @@ parse_commandline(int argc, char **argv)
 	struct xkcp_config *config = xkcp_get_config();
 	struct xkcp_param *param = &config->param;
 
-	while (-1 != (c = getopt_long(argc, argv, "Ac:D:d:e:fhi:K:k:L:l:M:m:NP:p:R:S:s:T:v",
+	while (-1 != (c = getopt_long(argc, argv, "Ac:D:d:e:fhi:K:k:L:l:M:m:NP:p:R:S:s:T:v:z",
 									long_options, NULL)))
 		switch (c) {
 
@@ -126,7 +126,7 @@ parse_commandline(int argc, char **argv)
 			break;
 		
 		case 'z':
-			config->socket_fd = atoi(optarg);
+			xkcp_set_config_fd(atoi(optarg));
 			printf("socket = %d\n",config->socket_fd);
 			break;
 

@@ -65,6 +65,8 @@ struct xkcp_config *xkcp_get_config(void);
 
 int xkcp_param_validate(struct xkcp_param * param);
 
+void xkcp_set_config_fd(int fd);
+
 int xkcp_parse_param(const char *filename);
 
 int xkcp_parse_json_param(struct xkcp_param *config, const char *filename);
